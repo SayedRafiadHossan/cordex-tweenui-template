@@ -22,19 +22,21 @@ const Chip = ({ children, tone = 'violet' }: { children: ReactNode; tone?: 'viol
   </span>
 );
 
+/* Chips wrap in a row on narrow cards; on wide screens (lg, where this card
+   spans two columns) they scatter like loose notes. */
 const MemoryVisual = () => (
-  <div className="relative mt-6 h-40">
+  <div className="mt-6 flex flex-wrap gap-2 py-2 lg:relative lg:block lg:h-40 lg:py-0">
     {[
-      ['Q3 pricing deck', 'left-[4%] top-2'],
-      ['Brand voice guide', 'left-[42%] top-0'],
-      ['Customer: Acme Co.', 'left-[16%] top-16'],
-      ['API docs v4', 'left-[56%] top-[4.5rem]'],
-      ['Refund policy', 'left-[30%] top-[7.5rem]'],
+      ['Q3 pricing deck', 'lg:left-[4%] lg:top-2'],
+      ['Brand voice guide', 'lg:left-[42%] lg:top-0'],
+      ['Customer: Acme Co.', 'lg:left-[16%] lg:top-16'],
+      ['API docs v4', 'lg:left-[56%] lg:top-[4.5rem]'],
+      ['Refund policy', 'lg:left-[30%] lg:top-[7.5rem]'],
     ].map(([label, pos], i) => (
       <span
         key={label}
         className={cn(
-          'absolute rounded-lg border border-[#a39e94]/15 bg-[#0a0a0b]/60 px-3 py-1.5 text-xs text-[#f5f1e8]/70 shadow-lg',
+          'rounded-lg border border-[#a39e94]/15 bg-[#0a0a0b]/60 px-3 py-1.5 text-xs whitespace-nowrap text-[#f5f1e8]/70 shadow-lg lg:absolute',
           pos
         )}
         style={{ transform: `rotate(${[-4, 3, -2, 5, -3][i]}deg)` }}
@@ -88,29 +90,33 @@ const ModelVisual = () => (
   </div>
 );
 
+/* A vertical hand-off chain, so it fits the narrowest card in the grid. */
 const CrewVisual = () => (
-  <div className="mt-6 flex items-center justify-between gap-2">
-    {['Researcher', 'Writer', 'Reviewer'].map((role, i) => (
-      <div key={role} className="flex flex-1 items-center gap-2">
-        <div className="flex flex-1 flex-col items-center gap-2 rounded-xl border border-[#a39e94]/12 bg-[#0a0a0b]/50 px-2 py-3">
-          <span
-            className={cn(
-              'grid size-9 place-items-center rounded-full font-display text-sm font-semibold',
-              i === 1 ? 'bg-[#ecd9b0] text-[#0a0a0b]' : 'bg-[#c9a96e] text-[#0a0a0b]'
-            )}
-          >
-            {role[0]}
-          </span>
-          <span className="text-[11px] text-[#f5f1e8]/70">{role}</span>
-        </div>
+  <ol className="mt-6">
+    {[
+      ['Researcher', 'finds sources'],
+      ['Writer', 'drafts the brief'],
+      ['Reviewer', 'checks & ships'],
+    ].map(([role, task], i) => (
+      <li key={role} className="relative flex items-center gap-3 pb-4 last:pb-0">
         {i < 2 ? (
-          <span aria-hidden="true" className="text-[#a39e94]/40">
-            →
-          </span>
+          <span aria-hidden="true" className="absolute top-9 bottom-0 left-[17px] w-px bg-[#a39e94]/20" />
         ) : null}
-      </div>
+        <span
+          className={cn(
+            'grid size-9 shrink-0 place-items-center rounded-full font-display text-sm font-semibold text-[#0a0a0b]',
+            i === 1 ? 'bg-[#ecd9b0]' : 'bg-[#c9a96e]'
+          )}
+        >
+          {role[0]}
+        </span>
+        <span className="min-w-0">
+          <span className="block text-sm text-[#f5f1e8]/85">{role}</span>
+          <span className="block text-xs text-[#a39e94]">{task}</span>
+        </span>
+      </li>
     ))}
-  </div>
+  </ol>
 );
 
 const TraceVisual = () => (

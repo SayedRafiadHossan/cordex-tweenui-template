@@ -16,14 +16,10 @@ const WORDMARKS = [
 ];
 
 /**
- * A gentle arc for wide text pills. Scale stays near 1 so neighbouring pills
- * never collide; the lift does most of the work.
+ * Only the logo passing through the middle of the page rises, easing up as it
+ * reaches the centre and back down as it leaves (see `spread` on LogoWave).
  */
-const WAVE = [
-  { scale: 1.06, y: -20 },
-  { scale: 1.03, y: -12 },
-  { scale: 1.01, y: -5 },
-];
+const WAVE = [{ scale: 1.08, y: -22 }];
 
 const STATS = [
   { value: 12, suffix: 'M+', label: 'agent runs every month' },
@@ -45,6 +41,7 @@ export default function LogosStats() {
         style={{ paddingTop: 32, paddingBottom: 12 }}
         wave={WAVE}
         smooth
+        spread={0.7}
         gap={28}
         duration={40}
         logos={WORDMARKS.map((w) => ({ src: '', alt: w.name }))}

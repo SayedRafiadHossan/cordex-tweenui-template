@@ -80,6 +80,12 @@ export interface LogoWaveProps extends ComponentPropsWithoutRef<'div'> {
    * Off by default: the original snaps the peak from mark to mark.
    */
   smooth?: boolean;
+  /**
+   * With `smooth`: how far, in marks, the lift reaches from the centre.
+   * 1 (default) blends across the whole wave; below 1 only the mark passing
+   * through the middle rises, easing up and back down.
+   */
+  spread?: number;
 }
 
 function peakPadding(wave: LogoWaveStep[]) {
@@ -113,15 +119,17 @@ function applySmoothWave(
   container: HTMLElement,
   items: HTMLElement[],
   steps: LogoWaveStep[],
-  unit: number
+  unit: number,
+  spread = 1
 ) {
   const box = container.getBoundingClientRect();
   const centerX = box.left + box.width / 2;
   items.forEach((el) => {
     const rect = el.getBoundingClientRect();
-    const dist = Math.abs(rect.left + rect.width / 2 - centerX) / unit;
+    const dist = Math.abs(rect.left + rect.width / 2 - centerX) / (unit * spread);
     const i = Math.floor(dist);
-    const t = dist - i;
+    const linear = dist - i;
+    const t = linear * linear * (3 - 2 * linear); // smoothstep: ease in and out of each step
     const a = steps[i] ?? REST;
     const b = steps[i + 1] ?? REST;
     if (a === REST && b === REST) {
@@ -164,6 +172,7 @@ const LogoWave = ({
   renderLogo,
   wave = DEFAULT_LOGO_WAVE,
   smooth = false,
+  spread = 1,
   className,
   style,
   ...props
@@ -210,7 +219,7 @@ const LogoWave = ({
 
       const syncActive = () => {
         if (smooth) {
-          applySmoothWave(container, items, wave, unit);
+          applySmoothWave(container, items, wave, unit, spread);
           return;
         }
         const center = findCenterIcon(container, track);
@@ -234,7 +243,7 @@ const LogoWave = ({
         repeat: -1,
         onUpdate: () => {
           if (smooth) {
-            applySmoothWave(container, items, wave, unit);
+            applySmoothWave(container, items, wave, unit, spread);
             return;
           }
           const center = findCenterIcon(container, track);
@@ -257,7 +266,7 @@ const LogoWave = ({
     },
     {
       scope: rootRef,
-      dependencies: [repeatCount, duration, direction, pauseOnHover, logos.length, gap, wave, smooth],
+      dependencies: [repeatCount, duration, direction, pauseOnHover, logos.length, gap, wave, smooth, spread],
     }
   );
 

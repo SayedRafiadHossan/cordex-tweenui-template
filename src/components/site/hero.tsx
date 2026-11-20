@@ -21,7 +21,7 @@ export default function Hero() {
         className="pointer-events-none absolute top-[340px] right-[-200px] -z-10 h-[520px] w-[520px] rounded-full bg-[radial-gradient(closest-side,rgb(236_217_176/0.08),transparent_70%)] blur-2xl"
       />
 
-      <div className="mx-auto grid max-w-7xl items-center gap-14 px-4 sm:px-6 lg:grid-cols-[1.05fr_1fr] lg:px-8">
+      <div className="mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)] items-center gap-14 px-4 sm:px-6 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:px-8">
         <div data-reveal-stagger className="text-center lg:text-left">
           <a
             href="#changelog"
@@ -34,7 +34,7 @@ export default function Hero() {
             <span aria-hidden="true">→</span>
           </a>
 
-          <h1 className="mt-7 font-display text-[44px] leading-[0.98] font-semibold tracking-[-0.045em] text-balance sm:text-6xl lg:text-[76px]">
+          <h1 className="mt-7 font-display text-[clamp(2.125rem,10.5vw,2.75rem)] leading-[0.98] font-semibold tracking-[-0.045em] text-balance sm:text-6xl lg:text-[76px]">
             AI agents that
             <MorphingText
               as="span"

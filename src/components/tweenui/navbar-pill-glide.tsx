@@ -486,7 +486,7 @@ const NavbarPillGlide = ({
             )}
           >
             {logo}
-            <RollText text={brand} className="text-lg font-semibold tracking-tight" />
+            <RollText text={brand} className="text-lg font-semibold tracking-tight max-[359px]:hidden" />
           </a>
 
           {pillLinks.length > 0 ? (
