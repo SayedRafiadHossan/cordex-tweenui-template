@@ -14,6 +14,7 @@ import Features from "./features";
 import LogoMark from "./logo";
 import IntegrationsOrbit from "./integrations-orbit";
 import { scrollToId } from "./scroll";
+import ScrollReveal from "./scroll-reveal";
 
 const IMG = (id: string, w = 800, h = 1000) =>
   `https://images.unsplash.com/${id}?w=${w}&h=${h}&fit=crop`;
@@ -318,7 +319,7 @@ export default function Landing() {
 
         <section id="how" className="scroll-mt-24 px-4 py-24 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-7xl">
-            <div className="mx-auto mb-16 max-w-2xl text-center">
+            <div data-reveal-stagger className="mx-auto mb-16 max-w-2xl text-center">
               <p className="text-xs font-medium tracking-[0.2em] text-[#ecd9b0] uppercase">
                 How it works
               </p>
@@ -375,7 +376,7 @@ export default function Landing() {
 
         <section id="faq" className="scroll-mt-24 px-4 py-24 sm:px-6 lg:px-8">
           <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[1fr_1.2fr]">
-            <div>
+            <div data-reveal-stagger>
               <p className="text-xs font-medium tracking-[0.2em] text-[#ecd9b0] uppercase">
                 FAQ
               </p>
@@ -387,7 +388,12 @@ export default function Landing() {
                 hour, and our support agent replies in seconds.
               </p>
             </div>
-            <FaqAccordion items={FAQS} defaultOpen={0} className="max-w-none" />
+            <FaqAccordion
+              data-reveal-stagger
+              items={FAQS}
+              defaultOpen={0}
+              className="max-w-none"
+            />
           </div>
         </section>
 
@@ -407,6 +413,7 @@ export default function Landing() {
           />
         </div>
       </main>
+      <ScrollReveal />
 
       <FooterWordmarkRise
         brand="Cortexa"

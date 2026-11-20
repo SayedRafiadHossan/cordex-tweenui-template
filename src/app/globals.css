@@ -155,6 +155,15 @@ html {
   mask-image: radial-gradient(ellipse 70% 60% at 50% 35%, black, transparent);
 }
 
+/* Scroll reveal (see components/site/scroll-reveal.tsx): start hidden so nothing
+   flashes before the animation runs. Reduced-motion visitors and no-JS visitors
+   (see the <noscript> in layout.tsx) get the content immediately. */
+@media (prefers-reduced-motion: no-preference) {
+  [data-reveal], [data-reveal-stagger] > * {
+    opacity: 0;
+  }
+}
+
 /* Fine film grain over the whole page, for a printed, premium feel. */
 body::after {
   content: "";

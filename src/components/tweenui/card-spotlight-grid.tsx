@@ -3,9 +3,10 @@
 import { useRef, type ComponentPropsWithoutRef, type MouseEvent, type ReactNode } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { cn } from '@/lib/utils';
 
-gsap.registerPlugin(useGSAP);
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 const prefersReducedMotion = () =>
   typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -121,7 +122,7 @@ const CardSpotlightGrid = ({
       // `visibility: hidden`, which drops it out of the accessibility tree for
       // as long as the intro is pending.
       gsap
-        .timeline()
+        .timeline({ scrollTrigger: { trigger: rootRef.current, start: 'top 80%', once: true } })
         .fromTo(
           '[data-spotlight-intro]',
           { y: 18, opacity: 0 },

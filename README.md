@@ -31,6 +31,8 @@ Open http://localhost:3000.
 
 Smooth scrolling uses [Lenis](https://lenis.darkroom.engineering/), synced with GSAP ScrollTrigger.
 
+Content reveals section by section as it scrolls into view. Add `data-reveal` to an element, or `data-reveal-stagger` to a container to reveal its children one by one (`src/components/site/scroll-reveal.tsx`).
+
 ## Customising
 
 - **Copy and content:** `src/components/site/landing.tsx` (nav, templates, steps, testimonials, pricing, FAQ, footer).

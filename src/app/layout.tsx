@@ -32,6 +32,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${geistSans.variable} ${geistMono.variable} ${display.variable} dark overflow-x-clip antialiased`}
     >
       <body className="overflow-x-clip bg-[#0a0a0b] text-[#f5f1e8]">
+        <noscript>
+          <style>{"[data-reveal],[data-reveal-stagger]>*{opacity:1!important}"}</style>
+        </noscript>
         <SmoothScroll />
         {children}
       </body>

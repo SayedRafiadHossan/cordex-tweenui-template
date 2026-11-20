@@ -175,7 +175,7 @@ const CtaStarfall = ({
       />
 
       <div className="relative z-10 mx-auto max-w-[600px] space-y-10 text-center">
-        <div className="space-y-3">
+        <div data-reveal-stagger className="space-y-3">
           <h2 className="text-3xl font-medium tracking-tight text-balance text-white/90 md:text-5xl">
             {title}
           </h2>
@@ -183,7 +183,7 @@ const CtaStarfall = ({
         </div>
 
         {action && (
-          <div className="flex justify-center">
+          <div data-reveal className="flex justify-center">
             <ShinyButton onClick={action.onClick}>{action.label}</ShinyButton>
           </div>
         )}

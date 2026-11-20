@@ -35,10 +35,11 @@ const STATS = [
 export default function LogosStats() {
   return (
     <section className="relative border-y border-[#a39e94]/10 bg-[#0e0e0e] py-14">
-      <p className="text-center text-xs font-medium tracking-[0.2em] text-[#a39e94]/70 uppercase">
+      <p data-reveal className="text-center text-xs font-medium tracking-[0.2em] text-[#a39e94]/70 uppercase">
         Trusted by fast-moving teams
       </p>
       <LogoWave
+        data-reveal="fade"
         className="mt-6 [mask-image:linear-gradient(90deg,transparent,black_12%,black_88%,transparent)]"
         // The component sizes its padding for 42px icons; these pills are 48px, so reserve the room here.
         style={{ paddingTop: 32, paddingBottom: 12 }}
@@ -55,7 +56,7 @@ export default function LogosStats() {
         )}
       />
 
-      <dl className="mx-auto mt-14 grid max-w-6xl grid-cols-2 gap-y-10 px-4 sm:px-6 lg:grid-cols-4 lg:px-8">
+      <dl data-reveal-stagger className="mx-auto mt-14 grid max-w-6xl grid-cols-2 gap-y-10 px-4 sm:px-6 lg:grid-cols-4 lg:px-8">
         {STATS.map((s) => (
           <div key={s.label} className="text-center">
             <dt className="sr-only">{s.label}</dt>

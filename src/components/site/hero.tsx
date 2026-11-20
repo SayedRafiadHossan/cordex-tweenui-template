@@ -22,7 +22,7 @@ export default function Hero() {
       />
 
       <div className="mx-auto grid max-w-7xl items-center gap-14 px-4 sm:px-6 lg:grid-cols-[1.05fr_1fr] lg:px-8">
-        <div className="text-center lg:text-left">
+        <div data-reveal-stagger className="text-center lg:text-left">
           <a
             href="#changelog"
             className="inline-flex items-center gap-2.5 rounded-full bg-white/[0.04] py-1.5 pr-4 pl-1.5 text-xs font-medium text-[#a39e94] ring-1 ring-white/10 transition-colors hover:bg-white/[0.07]"
@@ -76,7 +76,9 @@ export default function Hero() {
           </div>
         </div>
 
-        <AgentConsole className="mx-auto w-full max-w-xl lg:max-w-none" />
+        <div data-reveal="scale" className="mx-auto w-full max-w-xl lg:max-w-none">
+          <AgentConsole className="w-full" />
+        </div>
       </div>
     </section>
   );

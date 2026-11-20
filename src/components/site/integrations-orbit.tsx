@@ -166,7 +166,7 @@ export default function IntegrationsOrbit() {
     >
       <div className="mx-auto grid max-w-7xl items-center gap-16 lg:grid-cols-[1fr_1.15fr]">
         {/* Copy */}
-        <div className="max-w-xl">
+        <div data-reveal-stagger className="max-w-xl">
           <p className="text-xs font-medium tracking-[0.2em] text-[#ecd9b0] uppercase">
             Integrations
           </p>

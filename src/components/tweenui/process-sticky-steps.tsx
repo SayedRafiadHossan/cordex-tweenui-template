@@ -91,6 +91,7 @@ const StepCard = ({
     <div
       ref={cardRef}
       id={step.id}
+      data-reveal
       data-active={active ? 'true' : undefined}
       className={cn(
         'relative w-full scroll-mt-32 overflow-hidden rounded-3xl border bg-white p-4 transition-colors duration-300 motion-reduce:transition-none dark:bg-[#141414]',
@@ -207,7 +208,7 @@ const ProcessStickySteps = ({
       {...props}
     >
       <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_1px_minmax(0,1.35fr)] lg:gap-16">
-        <h2 className="text-3xl leading-[1.15] font-medium tracking-tight text-balance text-[#141414] sm:text-4xl lg:sticky lg:top-32 lg:max-w-md lg:text-5xl dark:text-white">
+        <h2 data-reveal className="text-3xl leading-[1.15] font-medium tracking-tight text-balance text-[#141414] sm:text-4xl lg:sticky lg:top-32 lg:max-w-md lg:text-5xl dark:text-white">
           {title}
         </h2>
 

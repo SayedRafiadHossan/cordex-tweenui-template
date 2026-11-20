@@ -174,7 +174,7 @@ const FEATURES: Feature[] = [
 export default function Features() {
   return (
     <section id="features" className="relative mx-auto max-w-7xl scroll-mt-24 px-4 py-24 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-2xl text-center">
+      <div data-reveal-stagger className="mx-auto max-w-2xl text-center">
         <p className="text-xs font-medium tracking-[0.2em] text-[#ecd9b0] uppercase">Platform</p>
         <h2 className="mt-4 font-display text-4xl font-semibold tracking-[-0.035em] text-balance sm:text-5xl">
           Everything an agent needs to <span className="cx-gradient-text">work for real</span>
@@ -185,7 +185,7 @@ export default function Features() {
         </p>
       </div>
 
-      <div className="mt-16 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+      <div data-reveal-stagger className="mt-16 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         {FEATURES.map((f) => (
           <article
             key={f.title}

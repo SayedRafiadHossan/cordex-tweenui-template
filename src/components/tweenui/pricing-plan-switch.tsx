@@ -234,7 +234,7 @@ const PricingPlanSwitch = ({
       <div className="mx-auto max-w-[980px] space-y-10 px-4 lg:space-y-14">
         {/* Header */}
         <div className="space-y-6">
-          <div className="space-y-4 text-center">
+          <div data-reveal-stagger className="space-y-4 text-center">
             <span className="inline-block rounded-full border border-[#c9a96e]/20 px-3 py-1 text-xs font-medium tracking-wide text-[#c9a96e] uppercase dark:border-[#c9a96e]/40 dark:text-[#a39e94]">
               {eyebrow}
             </span>
@@ -249,7 +249,7 @@ const PricingPlanSwitch = ({
           </div>
 
           {/* Billing toggle */}
-          <div className="flex items-center justify-center">
+          <div data-reveal className="flex items-center justify-center">
             <label className="inline-flex cursor-pointer items-center">
               <span className="me-2.5 text-sm font-medium text-[#141414] select-none dark:text-white">
                 Monthly
@@ -269,7 +269,7 @@ const PricingPlanSwitch = ({
           </div>
         </div>
 
-        <div className="grid grid-cols-1 items-start gap-6 md:grid-cols-12 md:gap-8 lg:gap-12">
+        <div data-reveal-stagger className="grid grid-cols-1 items-start gap-6 md:grid-cols-12 md:gap-8 lg:gap-12">
           {/* Plan selector */}
           <div className="space-y-6 md:col-span-5">
             <div className="space-y-2 rounded-[20px] bg-[#c9a96e]/[0.06] p-2 dark:bg-[#c9a96e]/20">

@@ -391,7 +391,7 @@ const ColumnDrift = ({
       {...props}
     >
       <div className="mx-auto max-w-[1290px] space-y-10 md:space-y-16">
-        <div className="space-y-3 text-center">
+        <div data-reveal-stagger className="space-y-3 text-center">
           <h2 className="text-3xl font-medium tracking-tight text-[#141414] md:text-5xl dark:text-white">
             {title}
           </h2>
