@@ -44,6 +44,7 @@ export default function LogosStats() {
         // The component sizes its padding for 42px icons; these pills are 48px, so reserve the room here.
         style={{ paddingTop: 32, paddingBottom: 12 }}
         wave={WAVE}
+        smooth
         gap={28}
         duration={40}
         logos={WORDMARKS.map((w) => ({ src: '', alt: w.name }))}

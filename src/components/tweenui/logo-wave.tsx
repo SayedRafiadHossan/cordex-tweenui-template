@@ -74,6 +74,12 @@ export interface LogoWaveProps extends ComponentPropsWithoutRef<'div'> {
   renderLogo?: (logo: LogoWaveLogo, index: number) => ReactNode;
   /** Wave steps from the center mark outward. Index 0 is the peak. */
   wave?: LogoWaveStep[];
+  /**
+   * Lift every mark by its exact distance from the centre each frame, so the peak
+   * always sits in the middle and marks rise and fall smoothly as they pass it.
+   * Off by default: the original snaps the peak from mark to mark.
+   */
+  smooth?: boolean;
 }
 
 function peakPadding(wave: LogoWaveStep[]) {
@@ -97,6 +103,36 @@ function applyWave(items: HTMLElement[], center: HTMLElement, steps: LogoWaveSte
       el.style.transform = '';
       el.style.zIndex = '';
     }
+  });
+}
+
+const REST: LogoWaveStep = { scale: 1, y: 0 };
+
+/** Continuous wave: `unit` is the distance between neighbouring marks, in px. */
+function applySmoothWave(
+  container: HTMLElement,
+  items: HTMLElement[],
+  steps: LogoWaveStep[],
+  unit: number
+) {
+  const box = container.getBoundingClientRect();
+  const centerX = box.left + box.width / 2;
+  items.forEach((el) => {
+    const rect = el.getBoundingClientRect();
+    const dist = Math.abs(rect.left + rect.width / 2 - centerX) / unit;
+    const i = Math.floor(dist);
+    const t = dist - i;
+    const a = steps[i] ?? REST;
+    const b = steps[i + 1] ?? REST;
+    if (a === REST && b === REST) {
+      el.style.transform = '';
+      el.style.zIndex = '';
+      return;
+    }
+    const y = a.y + (b.y - a.y) * t;
+    const scale = a.scale + (b.scale - a.scale) * t;
+    el.style.transform = `translateY(${y.toFixed(2)}px) scale(${scale.toFixed(4)})`;
+    el.style.zIndex = String(Math.max(0, Math.round((steps.length - dist) * 10)));
   });
 }
 
@@ -127,6 +163,7 @@ const LogoWave = ({
   itemClassName,
   renderLogo,
   wave = DEFAULT_LOGO_WAVE,
+  smooth = false,
   className,
   style,
   ...props
@@ -168,7 +205,14 @@ const LogoWave = ({
       const items = Array.from(track.querySelectorAll<HTMLElement>('[data-logo-wave-item]'));
       if (items.length === 0) return;
 
+      const cycleWidth = track.scrollWidth / repeatCount || 1;
+      const unit = cycleWidth / logos.length;
+
       const syncActive = () => {
+        if (smooth) {
+          applySmoothWave(container, items, wave, unit);
+          return;
+        }
         const center = findCenterIcon(container, track);
         if (!center) return;
         applyWave(items, center, wave);
@@ -178,7 +222,6 @@ const LogoWave = ({
 
       if (prefersReducedMotion()) return;
 
-      const cycleWidth = track.scrollWidth / repeatCount || 1;
       const toRight = direction === 'right';
 
       gsap.set(track, { x: toRight ? -cycleWidth : 0 });
@@ -190,6 +233,10 @@ const LogoWave = ({
         ease: 'none',
         repeat: -1,
         onUpdate: () => {
+          if (smooth) {
+            applySmoothWave(container, items, wave, unit);
+            return;
+          }
           const center = findCenterIcon(container, track);
           if (!center || center === lastCenter) return;
           lastCenter = center;
@@ -210,7 +257,7 @@ const LogoWave = ({
     },
     {
       scope: rootRef,
-      dependencies: [repeatCount, duration, direction, pauseOnHover, logos.length, gap, wave],
+      dependencies: [repeatCount, duration, direction, pauseOnHover, logos.length, gap, wave, smooth],
     }
   );
 
@@ -235,7 +282,8 @@ const LogoWave = ({
               key={`${setIndex}-${logo.alt}-${index}`}
               data-logo-wave-item
               className={cn(
-                'grid size-[42px] shrink-0 place-items-center rounded-full border border-[#c9a96e]/10 bg-white p-2 shadow-[0_1px_2px_rgba(16,24,40,0.12)] transition-transform duration-500 ease-in-out motion-reduce:transition-none dark:border-[#c9a96e]/40 dark:bg-[#141414]',
+                'grid size-[42px] shrink-0 place-items-center rounded-full border border-[#c9a96e]/10 bg-white p-2 shadow-[0_1px_2px_rgba(16,24,40,0.12)] dark:border-[#c9a96e]/40 dark:bg-[#141414]',
+                !smooth && 'transition-transform duration-500 ease-in-out motion-reduce:transition-none',
                 itemClassName
               )}
             >
