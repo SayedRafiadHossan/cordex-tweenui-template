@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Vendored Tween UI sources (copied from the registry, linted upstream).
+    "src/components/tweenui/**",
   ]),
 ]);
 
