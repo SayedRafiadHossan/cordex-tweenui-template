@@ -164,6 +164,32 @@ html {
   }
 }
 
+/* Page transitions (React <ViewTransition> in app/(site)/template.tsx).
+   The old page eases up and out; the new page rises in just after. The navbar
+   is anchored so only the content moves. Keep selectors on one line: the dev
+   server drops rules whose selector list spans several lines. */
+::view-transition { pointer-events: none; }
+::view-transition-old(.page-out) { animation: cx-page-out 260ms cubic-bezier(0.4, 0, 1, 1) both; }
+::view-transition-new(.page-in) { animation: cx-page-in 620ms cubic-bezier(0.16, 1, 0.3, 1) 140ms both; }
+::view-transition-group(root) { animation-duration: 380ms; }
+::view-transition-group(site-header) { animation: none; z-index: 100; }
+::view-transition-old(site-header) { display: none; }
+::view-transition-new(site-header) { animation: none; }
+
+@keyframes cx-page-out {
+  from { opacity: 1; transform: translateY(0); filter: blur(0); }
+  to { opacity: 0; transform: translateY(-28px); filter: blur(6px); }
+}
+
+@keyframes cx-page-in {
+  from { opacity: 0; transform: translateY(36px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(*), ::view-transition-new(*), ::view-transition-group(*) { animation-duration: 0s !important; animation-delay: 0s !important; }
+}
+
 /* Fine film grain over the whole page, for a printed, premium feel. */
 body::after {
   content: "";

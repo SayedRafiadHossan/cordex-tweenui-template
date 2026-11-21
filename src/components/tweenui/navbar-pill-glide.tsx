@@ -479,7 +479,11 @@ const NavbarPillGlide = ({
       )}
       {...props}
     >
-      <header className="pointer-events-none fixed inset-x-0 top-0 z-50">
+      <header
+        className="pointer-events-none fixed inset-x-0 top-0 z-50"
+        // Anchored during page transitions (see globals.css): only the content moves.
+        style={{ viewTransitionName: 'site-header' }}
+      >
         <div ref={barRef} className={cn(CONTAINER, 'flex h-20 items-center justify-between gap-6')}>
           <SiteLink
             href={homeHref}
