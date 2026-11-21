@@ -24,7 +24,7 @@ export default function Hero() {
       <div className="mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)] items-center gap-14 px-4 sm:px-6 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:px-8">
         <div data-reveal-stagger className="text-center lg:text-left">
           <a
-            href="#changelog"
+            href="/changelog"
             className="inline-flex items-center gap-2.5 rounded-full bg-white/[0.04] py-1.5 pr-4 pl-1.5 text-xs font-medium text-[#a39e94] ring-1 ring-white/10 transition-colors hover:bg-white/[0.07]"
           >
             <span className="rounded-full bg-[#ecd9b0] px-2 py-0.5 text-[10px] font-semibold tracking-wider text-[#0a0a0b] uppercase">

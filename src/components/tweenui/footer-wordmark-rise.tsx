@@ -5,6 +5,7 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText } from 'gsap/SplitText';
+import Link from 'next/link';
 import { cn } from '@/lib/utils';
 
 gsap.registerPlugin(useGSAP, ScrollTrigger, SplitText);
@@ -141,6 +142,10 @@ const SOCIAL_PATHS: Record<FooterSocialIcon, ReactNode> = {
 
 const isExternal = (href: string) => /^https?:/.test(href);
 
+/** Internal routes use Next.js <Link> (client-side navigation); external and mailto links stay plain anchors. */
+const SiteLink = ({ href, ...props }: ComponentPropsWithoutRef<'a'> & { href: string }) =>
+  /^(https?:|mailto:)/.test(href) ? <a href={href} {...props} /> : <Link href={href} {...props} />;
+
 const externalProps = (href: string) =>
   isExternal(href) ? { target: '_blank', rel: 'noopener noreferrer' } : {};
 
@@ -179,7 +184,7 @@ const LinkGroup = ({ column }: { column: FooterColumn }) => {
       <ul aria-labelledby={headingId} className="grid gap-3">
         {column.links.map((link) => (
           <li key={`${link.label}-${link.href}`}>
-            <a
+            <SiteLink
               href={link.href}
               {...externalProps(link.href)}
               className={cn(
@@ -189,7 +194,7 @@ const LinkGroup = ({ column }: { column: FooterColumn }) => {
               )}
             >
               <RollLabel label={link.label} />
-            </a>
+            </SiteLink>
           </li>
         ))}
       </ul>
@@ -348,10 +353,10 @@ const FooterWordmarkRise = ({
           className="flex flex-wrap items-start justify-between gap-12 max-md:flex-col max-md:gap-10"
         >
           <div className="grid w-[300px] justify-items-start gap-6 max-md:w-full">
-            <a href="/" className={cn('flex items-center gap-2.5', focusRing)}>
+            <SiteLink href="/" className={cn('flex items-center gap-2.5', focusRing)}>
               {logo}
               <span className="text-lg font-semibold tracking-tight">{brand}</span>
-            </a>
+            </SiteLink>
             <p className="text-[15px] leading-relaxed text-[#a39e94]/70">{description}</p>
             {socials.length > 0 ? (
               <ul aria-label="Social links" className="flex gap-3">
@@ -426,7 +431,7 @@ const FooterWordmarkRise = ({
           <ul className="flex flex-wrap items-center gap-x-8 gap-y-3 max-sm:gap-x-6">
             {legal.map((link) => (
               <li key={`${link.label}-${link.href}`}>
-                <a
+                <SiteLink
                   href={link.href}
                   {...externalProps(link.href)}
                   className={cn(
@@ -437,7 +442,7 @@ const FooterWordmarkRise = ({
                   )}
                 >
                   {link.label}
-                </a>
+                </SiteLink>
               </li>
             ))}
           </ul>

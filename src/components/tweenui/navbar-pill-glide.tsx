@@ -11,6 +11,7 @@ import {
 } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
+import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import { setScrollLocked, smoothScrollTo } from '@/lib/smooth-scroll';
 
@@ -142,6 +143,10 @@ const isCurrentHref = (href: string, currentHref: string) => {
 
 const isExternal = (href: string) => /^https?:/.test(href);
 
+/** Internal routes use Next.js <Link> (client-side navigation); external and mailto links stay plain anchors. */
+const SiteLink = ({ href, ...props }: ComponentPropsWithoutRef<'a'> & { href: string }) =>
+  /^(https?:|mailto:)/.test(href) ? <a href={href} {...props} /> : <Link href={href} {...props} />;
+
 const externalProps = (href: string) =>
   isExternal(href) ? { target: '_blank', rel: 'noopener noreferrer' } : {};
 
@@ -212,7 +217,7 @@ const ActionLink = ({
   className?: string;
 }) => {
   return (
-    <a
+    <SiteLink
       href={action.href}
       {...externalProps(action.href)}
       className={cn(
@@ -235,7 +240,7 @@ const ActionLink = ({
       />
       <RollText text={action.label} />
       {variant === 'primary' ? <ArrowSwap /> : null}
-    </a>
+    </SiteLink>
   );
 };
 
@@ -476,7 +481,7 @@ const NavbarPillGlide = ({
     >
       <header className="pointer-events-none fixed inset-x-0 top-0 z-50">
         <div ref={barRef} className={cn(CONTAINER, 'flex h-20 items-center justify-between gap-6')}>
-          <a
+          <SiteLink
             href={homeHref}
             data-nav-item=""
             aria-label={`${brand} home`}
@@ -487,7 +492,7 @@ const NavbarPillGlide = ({
           >
             {logo}
             <RollText text={brand} className="text-lg font-semibold tracking-tight max-[359px]:hidden" />
-          </a>
+          </SiteLink>
 
           {pillLinks.length > 0 ? (
             <nav
@@ -510,7 +515,7 @@ const NavbarPillGlide = ({
                     const isCurrent = isCurrentHref(link.href, currentHref);
                     return (
                       <li key={`${link.label}-${link.href}`}>
-                        <a
+                        <SiteLink
                           href={link.href}
                           {...externalProps(link.href)}
                           aria-current={isCurrent ? 'page' : undefined}
@@ -523,7 +528,7 @@ const NavbarPillGlide = ({
                           )}
                         >
                           <RollText text={link.label} />
-                        </a>
+                        </SiteLink>
                       </li>
                     );
                   })}
@@ -588,17 +593,17 @@ const NavbarPillGlide = ({
             <ul className="flex flex-col">
               {links.map((link) => (
                 <li key={`${link.label}-${link.href}`} className="overflow-hidden">
-                  <a
+                  <SiteLink
                     href={link.href}
                     {...externalProps(link.href)}
                     data-menu-link=""
                     onClick={(event) => {
-                      // Same-page anchors don't unload the page: close the menu, unlock
-                      // scrolling, then glide to the section.
-                      if (!link.href.startsWith('#')) return;
-                      event.preventDefault();
+                      // The navbar stays mounted across pages, so close the menu ourselves.
                       setOpen(false);
                       setScrollLocked(false);
+                      if (!link.href.startsWith('#')) return;
+                      // Same-page anchor: glide to the section.
+                      event.preventDefault();
                       const target = document.querySelector(link.href);
                       if (target) smoothScrollTo(target);
                       else if (link.href === '#top' || link.href === '#') smoothScrollTo(0);
@@ -612,7 +617,7 @@ const NavbarPillGlide = ({
                     )}
                   >
                     <RollText text={link.label} />
-                  </a>
+                  </SiteLink>
                 </li>
               ))}
             </ul>
