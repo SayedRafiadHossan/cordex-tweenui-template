@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Link from "next/link";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { MotionPathPlugin } from "gsap/MotionPathPlugin";
@@ -63,7 +64,11 @@ const NODES = INTEGRATIONS.map((item, i) => {
   };
 });
 
-export default function IntegrationsOrbit() {
+export default function IntegrationsOrbit({
+  showPageLink = true,
+}: {
+  showPageLink?: boolean;
+}) {
   const rootRef = useRef<HTMLElement>(null);
 
   // Same sequence as Tween UI's Integration Hub: hub scales in, connectors
@@ -206,18 +211,20 @@ export default function IntegrationsOrbit() {
             ))}
           </ul>
 
-          <a
-            href="#pricing"
-            className="group mt-10 inline-flex items-center gap-2 border-b border-[#c9a96e]/40 pb-1 text-sm font-medium text-[#ecd9b0] transition-colors hover:border-[#ecd9b0]"
-          >
-            Browse all integrations
-            <span
-              aria-hidden="true"
-              className="transition-transform duration-300 group-hover:translate-x-1"
+          {showPageLink ? (
+            <Link
+              href="/integrations"
+              className="group mt-10 inline-flex items-center gap-2 border-b border-[#c9a96e]/40 pb-1 text-sm font-medium text-[#ecd9b0] transition-colors hover:border-[#ecd9b0]"
             >
-              →
-            </span>
-          </a>
+              Browse all integrations
+              <span
+                aria-hidden="true"
+                className="transition-transform duration-300 group-hover:translate-x-1"
+              >
+                →
+              </span>
+            </Link>
+          ) : null}
         </div>
 
         {/* Orbit diagram */}

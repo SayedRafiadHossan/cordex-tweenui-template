@@ -11,7 +11,7 @@ import LogosStats from './logos-stats';
 import Features from './features';
 import IntegrationsOrbit from './integrations-orbit';
 import PageCta from './page-cta';
-import { SectionHeader } from './page-hero';
+import { SectionCta, SectionHeader } from './page-hero';
 
 /** The home page: a tour of the whole product, each section linking to its own page. */
 export default function Landing() {
@@ -19,7 +19,7 @@ export default function Landing() {
     <>
       <Hero />
       <LogosStats />
-      <Features />
+      <Features cta={{ label: 'Explore the platform', href: '/platform' }} />
 
       <div id="agents" className="scroll-mt-20">
         <CardSpotlightGrid
@@ -31,6 +31,9 @@ export default function Landing() {
           description="Battle-tested templates for the jobs teams automate first. Clone one, connect your tools, and it is live in minutes."
           projects={FEATURED_AGENTS.map((a) => ({ ...a, href: '/agents' }))}
         />
+        <SectionCta href="/agents" className="mt-0 pb-8">
+          Browse all agent templates
+        </SectionCta>
       </div>
 
       <section id="how" className="scroll-mt-24 px-4 py-24 sm:px-6 lg:px-8">
@@ -48,6 +51,7 @@ export default function Landing() {
             }
             steps={STEPS}
           />
+          <SectionCta href="/platform#how">See how the platform works</SectionCta>
         </div>
       </section>
 
@@ -60,6 +64,9 @@ export default function Landing() {
         columns={TESTIMONIALS}
         rating={RATING}
       />
+      <SectionCta href="/customers" className="mt-0 pb-8">
+        Read customer stories
+      </SectionCta>
 
       <section id="pricing" className="scroll-mt-24 py-24">
         <PricingPlanSwitch
@@ -71,6 +78,7 @@ export default function Landing() {
           ctaText="Start 14-day free trial"
           ctaHref="/contact"
         />
+        <SectionCta href="/pricing">Compare all plans</SectionCta>
       </section>
 
       <section id="faq" className="scroll-mt-24 px-4 py-24 sm:px-6 lg:px-8">
@@ -83,6 +91,7 @@ export default function Landing() {
           />
           <FaqAccordion data-reveal-stagger items={FAQS} defaultOpen={0} className="max-w-none" />
         </div>
+        <SectionCta href="/contact">Still have questions? Contact us</SectionCta>
       </section>
 
       <PageCta

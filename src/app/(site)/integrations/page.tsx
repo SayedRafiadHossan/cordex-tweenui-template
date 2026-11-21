@@ -35,7 +35,7 @@ export default function IntegrationsPage() {
         description={`${INTEGRATIONS.length} featured integrations, 400+ in total. Agents read, write and take action across your stack, and only touch what you allow.`}
       />
 
-      <IntegrationsOrbit />
+      <IntegrationsOrbit showPageLink={false} />
 
       <Section>
         <SectionHeader eyebrow="Directory" title="Find your stack" className="mb-12" />

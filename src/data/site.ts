@@ -11,12 +11,18 @@ export const ICON = (slug: string) => `https://cdn.simpleicons.org/${slug}/f5f1e
 
 /* ------------------------------------------------------------------ nav */
 
-/** Navbar pages. Home is the logo on desktop and the first item in the mobile menu. */
+/**
+ * Navbar pages, in the same order as the home page sections (Platform → Agents →
+ * Integrations → Customers → Pricing), then the usual resources and company links.
+ * Home is the logo on desktop and the first item in the mobile menu.
+ */
 export const NAV_LINKS = [
   { label: 'Home', href: '/', image: AGENT_IMG('code-reviewer') },
   { label: 'Platform', href: '/platform', image: AGENT_IMG('data-analyst') },
   { label: 'Agents', href: '/agents', image: AGENT_IMG('support-resolver') },
-  { label: 'Pricing', href: '/pricing', image: AGENT_IMG('sales-sdr') },
+  { label: 'Integrations', href: '/integrations', image: STEP_IMG('connect') },
+  { label: 'Customers', href: '/customers', image: AGENT_IMG('sales-sdr') },
+  { label: 'Pricing', href: '/pricing', image: STEP_IMG('evals') },
   { label: 'Blog', href: '/blog', image: AGENT_IMG('research-scout') },
   { label: 'About', href: '/about', image: AGENT_IMG('ops-coordinator') },
 ];

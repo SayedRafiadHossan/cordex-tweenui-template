@@ -130,6 +130,17 @@ export function SectionHeader({
   );
 }
 
+/** Centered outline button at the end of a home page section, linking to that section's full page. */
+export function SectionCta({ href, children, className }: { href: string; children: ReactNode; className?: string }) {
+  return (
+    <div data-reveal className={cn('mt-12 flex justify-center', className)}>
+      <ButtonLink href={href} variant="outline">
+        {children}
+      </ButtonLink>
+    </div>
+  );
+}
+
 /** Standard section padding and width. */
 export function Section({
   children,
