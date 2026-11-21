@@ -11,14 +11,14 @@ export const ICON = (slug: string) => `https://cdn.simpleicons.org/${slug}/f5f1e
 
 /* ------------------------------------------------------------------ nav */
 
+/** Navbar pages. Home is the logo on desktop and the first item in the mobile menu. */
 export const NAV_LINKS = [
   { label: 'Home', href: '/', image: AGENT_IMG('code-reviewer') },
   { label: 'Platform', href: '/platform', image: AGENT_IMG('data-analyst') },
   { label: 'Agents', href: '/agents', image: AGENT_IMG('support-resolver') },
-  { label: 'Integrations', href: '/integrations', image: STEP_IMG('connect') },
   { label: 'Pricing', href: '/pricing', image: AGENT_IMG('sales-sdr') },
-  { label: 'Customers', href: '/customers', image: AGENT_IMG('ops-coordinator') },
   { label: 'Blog', href: '/blog', image: AGENT_IMG('research-scout') },
+  { label: 'About', href: '/about', image: AGENT_IMG('ops-coordinator') },
 ];
 
 export const FOOTER_COLUMNS = [
@@ -36,7 +36,6 @@ export const FOOTER_COLUMNS = [
     links: [
       { label: 'Blog', href: '/blog' },
       { label: 'Changelog', href: '/changelog' },
-      { label: 'Customers', href: '/customers' },
       { label: 'Security', href: '/legal/security' },
     ],
   },
@@ -44,9 +43,9 @@ export const FOOTER_COLUMNS = [
     heading: 'Company',
     links: [
       { label: 'About', href: '/about' },
+      { label: 'Customers', href: '/customers' },
       { label: 'Careers', href: '/careers' },
       { label: 'Contact', href: '/contact' },
-      { label: 'Book a demo', href: '/contact' },
     ],
   },
 ];
