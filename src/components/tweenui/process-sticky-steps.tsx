@@ -104,7 +104,7 @@ const StepCard = ({
         <img
           src={step.image}
           alt={step.imageAlt}
-          className="size-full rounded-[14px] object-cover object-top"
+          className="size-full rounded-[14px] object-cover object-center"
         />
 
         {step.overlay ? (

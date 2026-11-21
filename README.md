@@ -40,5 +40,5 @@ Content reveals section by section as it scrolls into view. Add `data-reveal` to
 - **Logo:** `src/components/site/logo.tsx` and `src/app/icon.svg` (keep them in sync).
 - **Tween UI sources** live in `src/components/tweenui/` and are meant to be edited.
 
-Images are from Unsplash and integration icons from Simple Icons; replace them before shipping.
+Photos are free images from [Lummi](https://www.lummi.ai/license) (free for commercial use, no credit required; they can't be resold on their own), stored in `public/images/`. Integration icons are loaded from Simple Icons.
 Company names, people and numbers on the page are placeholders.

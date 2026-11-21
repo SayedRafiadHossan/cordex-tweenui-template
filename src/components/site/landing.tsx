@@ -16,10 +16,10 @@ import IntegrationsOrbit from "./integrations-orbit";
 import { scrollToId } from "./scroll";
 import ScrollReveal from "./scroll-reveal";
 
-const IMG = (id: string, w = 800, h = 1000) =>
-  `https://images.unsplash.com/${id}?w=${w}&h=${h}&fit=crop`;
-const AVATAR = (id: string) =>
-  `https://images.unsplash.com/${id}?w=96&h=96&fit=crop&crop=faces`;
+// Images are free photos from Lummi (https://www.lummi.ai/license), stored in /public/images.
+const AGENT_IMG = (name: string) => `/images/agents/${name}.webp`;
+const STEP_IMG = (name: string) => `/images/steps/${name}.webp`;
+const AVATAR = (name: string) => `/images/people/${name}.webp`;
 
 const LOGO = <LogoMark />;
 
@@ -27,32 +27,32 @@ const NAV_LINKS = [
   {
     label: "Home",
     href: "#top",
-    image: IMG("photo-1618005182384-a83a8bd57fbe", 900, 700),
+    image: AGENT_IMG("code-reviewer"),
   },
   {
     label: "Platform",
     href: "#features",
-    image: IMG("photo-1551650975-87deedd944c3", 900, 700),
+    image: AGENT_IMG("data-analyst"),
   },
   {
     label: "Agents",
     href: "#agents",
-    image: IMG("photo-1460925895917-afdab827c52f", 900, 700),
+    image: AGENT_IMG("support-resolver"),
   },
   {
     label: "How it works",
     href: "#how",
-    image: IMG("photo-1522071820081-009f0129c71c", 900, 700),
+    image: STEP_IMG("describe"),
   },
   {
     label: "Pricing",
     href: "#pricing",
-    image: IMG("photo-1552664730-d307ca884978", 900, 700),
+    image: AGENT_IMG("sales-sdr"),
   },
   {
     label: "FAQ",
     href: "#faq",
-    image: IMG("photo-1531403009284-440f080d1e12", 900, 700),
+    image: AGENT_IMG("research-scout"),
   },
 ];
 
@@ -60,38 +60,38 @@ const AGENT_TEMPLATES = [
   {
     title: "Sales SDR",
     excerpt: "Prospects, enriches, books calls",
-    image: IMG("photo-1552664730-d307ca884978"),
-    imageAlt: "Sales team planning outreach",
+    image: AGENT_IMG("sales-sdr"),
+    imageAlt: "Two people shaking hands in silhouette against warm city lights",
   },
   {
     title: "Support Resolver",
     excerpt: "Answers tickets from your docs",
-    image: IMG("photo-1551650975-87deedd944c3"),
-    imageAlt: "Support dashboard on a laptop",
+    image: AGENT_IMG("support-resolver"),
+    imageAlt: "Smiling support representative wearing a headset",
   },
   {
     title: "Data Analyst",
     excerpt: "SQL, charts and weekly briefs",
-    image: IMG("photo-1460925895917-afdab827c52f"),
-    imageAlt: "Analytics dashboard",
+    image: AGENT_IMG("data-analyst"),
+    imageAlt: "Glowing analytics charts on a dark screen",
   },
   {
     title: "Research Scout",
     excerpt: "Deep web research with sources",
-    image: IMG("photo-1618005182384-a83a8bd57fbe"),
-    imageAlt: "Abstract 3D shapes",
+    image: AGENT_IMG("research-scout"),
+    imageAlt: "Person studying alone at a desk in the evening",
   },
   {
     title: "Code Reviewer",
     excerpt: "Reviews PRs, writes the fix",
-    image: IMG("photo-1531403009284-440f080d1e12"),
-    imageAlt: "Engineers in a workshop",
+    image: AGENT_IMG("code-reviewer"),
+    imageAlt: "Laptop showing code in front of a city at dusk",
   },
   {
     title: "Ops Coordinator",
     excerpt: "Runs recurring back-office work",
-    image: IMG("photo-1522071820081-009f0129c71c"),
-    imageAlt: "Team coordinating work",
+    image: AGENT_IMG("ops-coordinator"),
+    imageAlt: "Operator in a room full of monitoring screens",
   },
 ];
 
@@ -101,32 +101,32 @@ const STEPS = [
     title: "Describe the job",
     description:
       "Write the goal in plain English, or start from one of 60+ templates.",
-    image: IMG("photo-1531403009284-440f080d1e12", 800, 520),
-    imageAlt: "Team writing goals on a whiteboard",
+    image: STEP_IMG("describe"),
+    imageAlt: "Open notebook with handwritten notes in warm light",
   },
   {
     id: "step-2",
     title: "Connect your tools",
     description:
       "One-click access to your CRM, docs, inbox and database, scoped per agent.",
-    image: IMG("photo-1551650975-87deedd944c3", 800, 520),
-    imageAlt: "Connecting apps on a laptop",
+    image: STEP_IMG("connect"),
+    imageAlt: "Hands holding glowing fiber optic cables",
   },
   {
     id: "step-3",
     title: "Test with evals",
     description:
       "Replay real tasks, compare runs side by side and tune guardrails.",
-    image: IMG("photo-1460925895917-afdab827c52f", 800, 520),
-    imageAlt: "Evaluation charts on a dashboard",
+    image: STEP_IMG("evals"),
+    imageAlt: "Monitor showing charts on a dark workstation",
   },
   {
     id: "step-4",
     title: "Deploy anywhere",
     description:
       "Run on a schedule, from Slack, by API, or embedded in your product.",
-    image: IMG("photo-1522071820081-009f0129c71c", 800, 520),
-    imageAlt: "Team celebrating a launch",
+    image: STEP_IMG("deploy"),
+    imageAlt: "Rocket launching through clouds at night",
   },
 ];
 
@@ -141,7 +141,7 @@ const TESTIMONIALS = [
     {
       name: "Liam Harper",
       jobTitle: "Head of RevOps, Lumora",
-      image: AVATAR("photo-1500648767791-00dcc994a43e"),
+      image: AVATAR("liam"),
       stars: 5,
       ...q(
         "Our SDR agent books",
@@ -152,7 +152,7 @@ const TESTIMONIALS = [
     {
       name: "Maya Collins",
       jobTitle: "Support Lead, Halcyon",
-      image: AVATAR("photo-1494790108377-be9c29b29330"),
+      image: AVATAR("maya"),
       stars: 5,
       ...q(
         "Half our tickets now",
@@ -165,7 +165,7 @@ const TESTIMONIALS = [
     {
       name: "Ethan Brooks",
       jobTitle: "CTO, Vectra",
-      image: AVATAR("photo-1519085360753-af0119f7cbe7"),
+      image: AVATAR("ethan"),
       stars: 5,
       ...q(
         "Evals are the killer feature.",
@@ -176,7 +176,7 @@ const TESTIMONIALS = [
     {
       name: "Zoe Mitchell",
       jobTitle: "Product Designer, Quanta",
-      image: AVATAR("photo-1438761681033-6461ffad8d80"),
+      image: AVATAR("zoe"),
       stars: 5,
       ...q(
         "I built a research agent in an afternoon,",
@@ -189,7 +189,7 @@ const TESTIMONIALS = [
     {
       name: "Noah Bennett",
       jobTitle: "VP Operations, Northwind",
-      image: AVATAR("photo-1507003211169-0a1dd7228f2d"),
+      image: AVATAR("noah"),
       stars: 5,
       ...q(
         "Guardrails made legal say yes.",
@@ -200,7 +200,7 @@ const TESTIMONIALS = [
     {
       name: "Ava Chen",
       jobTitle: "Data Lead, Fieldnote",
-      image: AVATAR("photo-1544005313-94ddf0286df2"),
+      image: AVATAR("ava"),
       stars: 5,
       ...q(
         "The Monday metrics brief",
